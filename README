@@ -1,3 +1,14 @@
+INSTALLATION
+============
+git clone git://github.com/jk-cheng/rails_auction.git
+cd rails_aucion
+sudo rake gems:install
+ruby script/server
+
+DEVELOPMENT
+===========
+http://0.0.0.0:3000
+
 CHANGELOG
 =========
 
