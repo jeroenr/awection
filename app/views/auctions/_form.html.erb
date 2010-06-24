@@ -1,0 +1,101 @@
+<% form_for @auction do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :meta_description %><br />
+    <%= f.text_field :meta_description %>
+  </p>
+  <p>
+    <%= f.label :meta_keywords %><br />
+    <%= f.text_field :meta_keywords %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :class => "mceEditor" %>
+  </p>
+  <p>
+    <%= f.label :category_id %><br />
+    <%= f.text_field :category_id %>
+  </p>
+  <p>
+    <%= f.label :start_time %><br />
+    <%= f.datetime_select :start_time %>
+  </p>
+  <p>
+    <%= f.label :end_time %><br />
+    <%= f.datetime_select :end_time %>
+  </p>
+  <p>
+    <%= f.label :rrp %><br />
+    <%= f.text_field :rrp %>
+  </p>
+  <p>
+    <%= f.label :start_price %><br />
+    <%= f.text_field :start_price %>
+  </p>
+  <p>
+    <%= f.label :featured %><br />
+    <%= f.check_box :featured %>
+  </p>
+  <p>
+    <%= f.label :delivery_cost %><br />
+    <%= f.text_field :delivery_cost %>
+  </p>
+  <p>
+    <%= f.label :delivery_information %><br />
+    <%= f.text_field :delivery_information %>
+  </p>
+  <p>
+    <%= f.label :peak_only %><br />
+    <%= f.check_box :peak_only %>
+  </p>
+  <p>
+    <%= f.label :fixed_price %><br />
+    <%= f.text_field :fixed_price %>
+  </p>
+  <p>
+    <%= f.label :minimum_price %><br />
+    <%= f.text_field :minimum_price %>
+  </p>
+  <p>
+    <%= f.label :time_extended %><br />
+    <%= f.text_field :time_extended %>
+  </p>
+  <p>
+    <%= f.label :time_before_extended %><br />
+    <%= f.text_field :time_before_extended %>
+  </p>
+  <p>
+    <%= f.label :autobid %><br />
+    <%= f.check_box :autobid %>
+  </p>
+  <p>
+    <%= f.label :autobid_limit %><br />
+    <%= f.text_field :autobid_limit %>
+  </p>
+  <p>
+    <%= f.label :current_limit %><br />
+    <%= f.text_field :current_limit %>
+  </p>
+  <p>
+    <%= f.label :extend_enabled %><br />
+    <%= f.check_box :extend_enabled %>
+  </p>
+  <p>
+    <%= f.label :winner_id %><br />
+    <%= f.text_field :winner_id %>
+  </p>
+  <p>
+    <%= f.label :status_id %><br />
+    <%= f.text_field :status_id %>
+  </p>
+  <p>
+    <%= f.label :closed %><br />
+    <%= f.check_box :closed %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+

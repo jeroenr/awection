@@ -1,0 +1,306 @@
+  [4;36;1mSQL (1.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (129.7ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (89.6ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (1.1ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateAuctions (20100624044020)
+  [4;35;1mSQL (1.1ms)[0m   [0mCREATE TABLE "auctions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "meta_description" varchar(255), "meta_keywords" varchar(255), "description" varchar(255), "category_id" integer, "start_time" datetime, "end_time" datetime, "rrp" float, "start_price" float, "featured" boolean, "delivery_cost" float, "delivery_information" varchar(255), "peak_only" boolean, "fixed_price" float, "minimum_price" float, "time_extended" integer, "time_before_extended" integer, "autobid" boolean, "autobid_limit" integer, "current_limit" integer, "extend_enabled" boolean, "winner_id" integer, "status_id" integer, "closed" boolean, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100624044020')[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("auctions")[0m
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 12:45:26) [GET]
+  [4;36;1mAuction Load (0.8ms)[0m   [0;1mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 117ms (View: 108, DB: 1) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#new (for 127.0.0.1 at 2010-06-24 12:45:38) [GET]
+Rendering template within layouts/application
+Rendering auctions/new
+Rendered auctions/_form (75.3ms)
+Completed in 105ms (View: 90, DB: 0) | 200 OK [http://0.0.0.0/auctions/new]
+
+
+Processing AuctionsController#create (for 127.0.0.1 at 2010-06-24 12:49:00) [POST]
+  Parameters: {"commit"=>"Save changes", "authenticity_token"=>"U1cXNc4ukXEANKLpSDZM1GFC6Um+1/uhGn2Mg74GANc=", "auction"=>{"current_limit"=>"", "autobid_limit"=>"", "start_time(1i)"=>"2010", "start_time(2i)"=>"6", "title"=>"Nintendo Wii Gaming Console with Wii Sports Resort - Black", "closed"=>"0", "peak_only"=>"0", "delivery_information"=>"Within 14 days in the original packaging", "featured"=>"0", "start_time(3i)"=>"24", "time_extended"=>"", "minimum_price"=>"", "end_time(1i)"=>"2010", "start_time(4i)"=>"04", "autobid"=>"0", "start_price"=>"", "rrp"=>"", "end_time(2i)"=>"6", "start_time(5i)"=>"45", "delivery_cost"=>"19.99", "end_time(3i)"=>"24", "category_id"=>"", "meta_keywords"=>"", "meta_description"=>"", "winner_id"=>"", "end_time(4i)"=>"04", "status_id"=>"", "extend_enabled"=>"0", "end_time(5i)"=>"45", "description"=>"", "time_before_extended"=>"", "fixed_price"=>""}}
+  [4;35;1mAuction Create (0.7ms)[0m   [0mINSERT INTO "auctions" ("end_time", "autobid_limit", "current_limit", "created_at", "title", "featured", "delivery_information", "peak_only", "closed", "updated_at", "minimum_price", "time_extended", "rrp", "start_price", "autobid", "meta_description", "meta_keywords", "category_id", "delivery_cost", "winner_id", "description", "extend_enabled", "status_id", "time_before_extended", "start_time", "fixed_price") VALUES('2010-06-24 04:45:00', NULL, NULL, '2010-06-24 04:49:00', 'Nintendo Wii Gaming Console with Wii Sports Resort - Black', 'f', 'Within 14 days in the original packaging', 'f', 'f', '2010-06-24 04:49:00', NULL, NULL, NULL, NULL, 'f', '', '', NULL, 19.99, NULL, '', 'f', NULL, NULL, '2010-06-24 04:45:00', NULL)[0m
+Redirected to http://0.0.0.0:3000/auctions/1
+Completed in 160ms (DB: 1) | 302 Found [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 12:49:01) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mAuction Load (1.5ms)[0m   [0;1mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 82ms (View: 66, DB: 1) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 12:49:11) [GET]
+  [4;35;1mAuction Load (1.3ms)[0m   [0mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 28ms (View: 19, DB: 1) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 12:51:32) [GET]
+  [4;36;1mAuction Load (1.5ms)[0m   [0;1mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 36ms (View: 27, DB: 1) | 200 OK [http://0.0.0.0/auctions]
+  [4;36;1mSQL (16.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (3.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (2.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateAuctions (20100624044020)
+  [4;36;1mSQL (1.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (175.1ms)[0m   [0mDROP TABLE "auctions"[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20100624044020'[0m
+  [4;35;1mSQL (0.8ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateAuctions (20100624044020)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mCREATE TABLE "auctions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "meta_description" varchar(255), "meta_keywords" varchar(255), "description" text, "category_id" integer, "start_time" datetime, "end_time" datetime, "rrp" float, "start_price" float, "featured" boolean, "delivery_cost" float, "delivery_information" varchar(255), "peak_only" boolean, "fixed_price" float, "minimum_price" float, "time_extended" integer, "time_before_extended" integer, "autobid" boolean, "autobid_limit" integer, "current_limit" integer, "extend_enabled" boolean, "winner_id" integer, "status_id" integer, "closed" boolean, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100624044020')[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("auctions")[0m
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 13:16:26) [GET]
+  [4;35;1mAuction Load (1.8ms)[0m   [0mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 66ms (View: 34, DB: 2) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#new (for 127.0.0.1 at 2010-06-24 13:16:29) [GET]
+Rendering template within layouts/application
+Rendering auctions/new
+
+ActionView::TemplateError (undefined method `textarea' for #<ActionView::Helpers::FormBuilder:0xb6d6c688>) on line #17 of app/views/auctions/_form.html.erb:
+14:   </p>
+15:   <p>
+16:     <%= f.label :description %><br />
+17:     <%= f.textarea :description %>
+18:   </p>
+19:   <p>
+20:     <%= f.label :category_id %><br />
+
+    app/views/auctions/_form.html.erb:17
+    app/views/auctions/_form.html.erb:1
+    app/views/auctions/new.html.erb:3
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (71.9ms)
+Rendered rescues/_request_and_response (42.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing AuctionsController#new (for 127.0.0.1 at 2010-06-24 13:16:50) [GET]
+Rendering template within layouts/application
+Rendering auctions/new
+Rendered auctions/_form (59.2ms)
+Completed in 81ms (View: 67, DB: 0) | 200 OK [http://0.0.0.0/auctions/new]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 13:27:20) [GET]
+  [4;36;1mAuction Load (27.5ms)[0m   [0;1mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 345ms (View: 283, DB: 28) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#new (for 127.0.0.1 at 2010-06-24 13:27:22) [GET]
+Rendering template within layouts/application
+Rendering auctions/new
+Rendered auctions/_form (112.5ms)
+Completed in 174ms (View: 160, DB: 0) | 200 OK [http://0.0.0.0/auctions/new]
+
+
+Processing AuctionsController#create (for 127.0.0.1 at 2010-06-24 13:30:03) [POST]
+  Parameters: {"commit"=>"Save changes", "authenticity_token"=>"U1cXNc4ukXEANKLpSDZM1GFC6Um+1/uhGn2Mg74GANc=", "auction"=>{"current_limit"=>"", "autobid_limit"=>"", "start_time(1i)"=>"2010", "start_time(2i)"=>"6", "title"=>"Nintendo Wii Gaming Console with Wii Sports Resort", "closed"=>"0", "peak_only"=>"0", "delivery_information"=>"Within 14 days in the original packaging", "featured"=>"0", "start_time(3i)"=>"24", "time_extended"=>"", "minimum_price"=>"", "end_time(1i)"=>"2010", "start_time(4i)"=>"05", "autobid"=>"0", "start_price"=>"1.00", "rrp"=>"", "end_time(2i)"=>"6", "start_time(5i)"=>"27", "delivery_cost"=>"19.99", "end_time(3i)"=>"25", "category_id"=>"", "meta_keywords"=>"", "meta_description"=>"", "winner_id"=>"", "end_time(4i)"=>"05", "status_id"=>"", "extend_enabled"=>"0", "end_time(5i)"=>"27", "description"=>"<p>Iron Man 2 immerses in the unique storyline specifically written for the game by the renowned comic book author Matt Fraction allowing players to truly feel the power of Iron Man with new destructible environments, epic enemies, and innovative hand-to-hand combat moves, as well as other features from the film and comic book. <br /> <br /> Enjoy next-generation graphics and a variety of unique titles that are controlled from the palm of your hand with the Nintendo Wii console. This system features a sleek black finish and comes bundled with a black Wii Remote with black Wii MotionPlus, black Nunchuk, Wii Sports game and Wii Sports Resort game. The Wii Remote's unique motion sensitivity transfers your movements to the screen to simulate swinging a tennis racket, throwing a ball or picking up a spare. The Nunchuk controller attaches to the Wii Remote and uses an analog stick along with motion-sensing technology to assist in character movement. Wii MotionPlus adds even more precision to your movements, allowing your character to mimic your motions in real time. The Wii is designed for intuitive motion control, letting you get into your game like never before.<br /> <br style=\"font-weight: bold;\" /> <span style=\"font-weight: bold;\">Features:</span></p>\r\n<ul>\r\n<li>Combines intuitive motion controls and interactive gaming with next-generation graphics in a sleek black finish</li>\r\n<li>Compact design allows you to place the Wii vertically or horizontally to fit almost any TV setup</li>\r\n<li>Wireless, motion-sensitive Wii Remote and motion-sensitive analog Nunchuk controller allow you to use real-life movements to simulate in-game character motions, such as throwing a pass or swinging a sword, making you truly part of the game</li>\r\n<li>Remote includes a speaker, a rumble feature and an expansion port for added gaming excitement</li>\r\n<li>Wii MotionPlus easily connects to the Wii Remote and adds greater motion-sensing precision to gameplay</li>\r\n<li>Connect up to four Wii controllers at once with Bluetooth wireless technology</li>\r\n<li>Easy yet exciting playability makes the Wii fun for players of any age or skill level</li>\r\n<li>Includes Wii Sports, an exciting sports game that will get you off the couch and onto the tennis court, baseball field, golf course, bowling alley or boxing ring</li>\r\n<li>Includes Wii Sports Resort, which takes the fun and intuitive controls of Wii Sports to the next level by utilizing the Wii MotionPlus controls &mdash; letting you duel with swords, draw a bow, throw a Frisbee and more</li>\r\n<li>Wii Channel Menu provides an easy-to-use interface where you can choose and play games, get news or weather, view and send photos, surf the Internet, post or send messages and shop for video games</li>\r\n<li>Mii Channel allows you to create a likeness of yourself to use across a variety of Wii software</li>\r\n<li>Connect to the Internet wirelessly, even when your system is turned off, to receive surprises and game updates with the WiiConnect24 service</li>\r\n</ul>\r\n<p><strong>What's in the box:</strong></p>\r\n<ul>\r\n<li>Black Nintendo Wii console</li>\r\n<li>Black Wii Remote controller,</li>\r\n<li>Black Nunchuk</li>\r\n<li>Black Wii MotionPlus</li>\r\n<li>Wii Sports game</li>\r\n<li>Wii Sports Resort game</li>\r\n</ul>", "time_before_extended"=>"", "fixed_price"=>"199.99"}}
+  [4;35;1mAuction Create (0.8ms)[0m   [0mINSERT INTO "auctions" ("end_time", "autobid_limit", "current_limit", "created_at", "title", "featured", "delivery_information", "peak_only", "closed", "updated_at", "minimum_price", "time_extended", "rrp", "start_price", "autobid", "meta_description", "meta_keywords", "category_id", "delivery_cost", "winner_id", "description", "extend_enabled", "status_id", "time_before_extended", "start_time", "fixed_price") VALUES('2010-06-25 05:27:00', NULL, NULL, '2010-06-24 05:30:03', 'Nintendo Wii Gaming Console with Wii Sports Resort', 'f', 'Within 14 days in the original packaging', 'f', 'f', '2010-06-24 05:30:03', NULL, NULL, NULL, 1.0, 'f', '', '', NULL, 19.99, NULL, '<p>Iron Man 2 immerses in the unique storyline specifically written for the game by the renowned comic book author Matt Fraction allowing players to truly feel the power of Iron Man with new destructible environments, epic enemies, and innovative hand-to-hand combat moves, as well as other features from the film and comic book. <br /> <br /> Enjoy next-generation graphics and a variety of unique titles that are controlled from the palm of your hand with the Nintendo Wii console. This system features a sleek black finish and comes bundled with a black Wii Remote with black Wii MotionPlus, black Nunchuk, Wii Sports game and Wii Sports Resort game. The Wii Remote''s unique motion sensitivity transfers your movements to the screen to simulate swinging a tennis racket, throwing a ball or picking up a spare. The Nunchuk controller attaches to the Wii Remote and uses an analog stick along with motion-sensing technology to assist in character movement. Wii MotionPlus adds even more precision to your movements, allowing your character to mimic your motions in real time. The Wii is designed for intuitive motion control, letting you get into your game like never before.<br /> <br style="font-weight: bold;" /> <span style="font-weight: bold;">Features:</span></p>
+<ul>
+<li>Combines intuitive motion controls and interactive gaming with next-generation graphics in a sleek black finish</li>
+<li>Compact design allows you to place the Wii vertically or horizontally to fit almost any TV setup</li>
+<li>Wireless, motion-sensitive Wii Remote and motion-sensitive analog Nunchuk controller allow you to use real-life movements to simulate in-game character motions, such as throwing a pass or swinging a sword, making you truly part of the game</li>
+<li>Remote includes a speaker, a rumble feature and an expansion port for added gaming excitement</li>
+<li>Wii MotionPlus easily connects to the Wii Remote and adds greater motion-sensing precision to gameplay</li>
+<li>Connect up to four Wii controllers at once with Bluetooth wireless technology</li>
+<li>Easy yet exciting playability makes the Wii fun for players of any age or skill level</li>
+<li>Includes Wii Sports, an exciting sports game that will get you off the couch and onto the tennis court, baseball field, golf course, bowling alley or boxing ring</li>
+<li>Includes Wii Sports Resort, which takes the fun and intuitive controls of Wii Sports to the next level by utilizing the Wii MotionPlus controls &mdash; letting you duel with swords, draw a bow, throw a Frisbee and more</li>
+<li>Wii Channel Menu provides an easy-to-use interface where you can choose and play games, get news or weather, view and send photos, surf the Internet, post or send messages and shop for video games</li>
+<li>Mii Channel allows you to create a likeness of yourself to use across a variety of Wii software</li>
+<li>Connect to the Internet wirelessly, even when your system is turned off, to receive surprises and game updates with the WiiConnect24 service</li>
+</ul>
+<p><strong>What''s in the box:</strong></p>
+<ul>
+<li>Black Nintendo Wii console</li>
+<li>Black Wii Remote controller,</li>
+<li>Black Nunchuk</li>
+<li>Black Wii MotionPlus</li>
+<li>Wii Sports game</li>
+<li>Wii Sports Resort game</li>
+</ul>', 'f', NULL, NULL, '2010-06-24 05:27:00', 199.99)[0m
+Redirected to http://0.0.0.0:3000/auctions/1
+Completed in 171ms (DB: 1) | 302 Found [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:30:03) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mAuction Load (13.5ms)[0m   [0;1mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 86ms (View: 58, DB: 13) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:30:31) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mAuction Load (1.0ms)[0m   [0mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 37ms (View: 21, DB: 1) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:31:28) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mAuction Load (1.1ms)[0m   [0;1mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 49ms (View: 32, DB: 1) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:33:40) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mAuction Load (1.5ms)[0m   [0mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 42ms (View: 25, DB: 1) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:34:39) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mAuction Load (1.1ms)[0m   [0;1mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 36ms (View: 21, DB: 1) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:35:25) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mAuction Load (1.0ms)[0m   [0mSELECT * FROM "auctions" WHERE ("auctions"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 39ms (View: 25, DB: 1) | 200 OK [http://0.0.0.0/auctions/1]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 13:35:33) [GET]
+  [4;36;1mAuction Load (1.5ms)[0m   [0;1mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 32ms (View: 21, DB: 1) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 13:38:01) [GET]
+  [4;35;1mAuction Load (1.5ms)[0m   [0mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 37ms (View: 27, DB: 2) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 13:38:51) [GET]
+  [4;36;1mAuction Load (1.5ms)[0m   [0;1mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 112ms (View: 103, DB: 2) | 200 OK [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#new (for 127.0.0.1 at 2010-06-24 13:39:00) [GET]
+Rendering template within layouts/application
+Rendering auctions/new
+Rendered auctions/_form (56.8ms)
+Completed in 73ms (View: 60, DB: 0) | 200 OK [http://0.0.0.0/auctions/new]
+
+
+Processing AuctionsController#create (for 127.0.0.1 at 2010-06-24 13:40:32) [POST]
+  Parameters: {"commit"=>"Save changes", "authenticity_token"=>"U1cXNc4ukXEANKLpSDZM1GFC6Um+1/uhGn2Mg74GANc=", "auction"=>{"current_limit"=>"", "autobid_limit"=>"", "start_time(1i)"=>"2010", "start_time(2i)"=>"6", "title"=>"XBOX 360 Elite", "closed"=>"0", "peak_only"=>"0", "delivery_information"=>"", "featured"=>"0", "start_time(3i)"=>"24", "time_extended"=>"", "minimum_price"=>"", "end_time(1i)"=>"2010", "start_time(4i)"=>"05", "autobid"=>"0", "start_price"=>"", "rrp"=>"", "end_time(2i)"=>"6", "start_time(5i)"=>"39", "delivery_cost"=>"", "end_time(3i)"=>"26", "category_id"=>"", "meta_keywords"=>"", "meta_description"=>"", "winner_id"=>"", "end_time(4i)"=>"05", "status_id"=>"", "extend_enabled"=>"0", "end_time(5i)"=>"39", "description"=>"<p>Xbox 360 Elite is the total entertainment experience. Enjoy the largest library of games, including the best exclusive titles. Watch thousands of HD movies and TV episodes at the press of a button including titles streamed instantly from Netflix.* Download Game Addons like songs, maps, levels and characters. Plus, with 120GB of storage, there&rsquo;s plenty of room to extend your fun.<br /> <br /> <strong>Details:</strong><strong></strong> <br /> <br /> <strong>Xbox 360 120GB Hard Drive</strong><br /> The 120GB detachable hard drive allows gamers to save their games and store television shows, movies, music, pictures, trailers, levels, demos and other content available from Xbox LIVE Marketplace. Xbox 360 Wireless Controller (black) This award-winning, high-performance wireless controller features the Xbox Guide Button for quick, in-game access to friends and music. It has a range of up to 30 feet and a battery life of up to 30 hours on two AA batteries. Xbox 360 Headset (black) Now available in black, the headset lets gamers strategize or trade taunts while playing games and send voice messages to friends on Xbox LIVE.<br /> <strong><br /> Xbox 360 Composite A/V cable</strong><br /> Maximize your Xbox 360 picture quality on standard-definition televisions using this S-Video connection for a noticeable image improvement over traditional composite connecters.<br /> <strong><br /> Xbox LIVE</strong><br /> Connect to Xbox LIVE for free and you&rsquo;ll find free game trials and have immediate access to HD movies and Game Add-ons like songs and characters (all sold separately) so the fun never ends. Included with your console is a one month subscription to Xbox LIVE Gold. Xbox LIVE Gold is the best in gaming and entertainment. Invite friends from all over to connect and play online multiplayer games or watch thousands of HD movies streamed instantly from Netflix. <span style=\"font-weight: bold;\"><br /> <br /> What's in the box:</span></p>\r\n<ul>\r\n<li>Xbox 360 Black Console</li>\r\n<li>Game</li>\r\n<li>Xbox 360 Black Wireless Controller</li>\r\n<li>Xbox 360 120GB Hard Drive</li>\r\n<li>Ethernet Cable</li>\r\n</ul>", "time_before_extended"=>"", "fixed_price"=>""}}
+  [4;35;1mAuction Create (0.7ms)[0m   [0mINSERT INTO "auctions" ("end_time", "autobid_limit", "current_limit", "created_at", "title", "featured", "delivery_information", "peak_only", "closed", "updated_at", "minimum_price", "time_extended", "rrp", "start_price", "autobid", "meta_description", "meta_keywords", "category_id", "delivery_cost", "winner_id", "description", "extend_enabled", "status_id", "time_before_extended", "start_time", "fixed_price") VALUES('2010-06-26 05:39:00', NULL, NULL, '2010-06-24 05:40:32', 'XBOX 360 Elite', 'f', '', 'f', 'f', '2010-06-24 05:40:32', NULL, NULL, NULL, NULL, 'f', '', '', NULL, NULL, NULL, '<p>Xbox 360 Elite is the total entertainment experience. Enjoy the largest library of games, including the best exclusive titles. Watch thousands of HD movies and TV episodes at the press of a button including titles streamed instantly from Netflix.* Download Game Addons like songs, maps, levels and characters. Plus, with 120GB of storage, there&rsquo;s plenty of room to extend your fun.<br /> <br /> <strong>Details:</strong><strong></strong> <br /> <br /> <strong>Xbox 360 120GB Hard Drive</strong><br /> The 120GB detachable hard drive allows gamers to save their games and store television shows, movies, music, pictures, trailers, levels, demos and other content available from Xbox LIVE Marketplace. Xbox 360 Wireless Controller (black) This award-winning, high-performance wireless controller features the Xbox Guide Button for quick, in-game access to friends and music. It has a range of up to 30 feet and a battery life of up to 30 hours on two AA batteries. Xbox 360 Headset (black) Now available in black, the headset lets gamers strategize or trade taunts while playing games and send voice messages to friends on Xbox LIVE.<br /> <strong><br /> Xbox 360 Composite A/V cable</strong><br /> Maximize your Xbox 360 picture quality on standard-definition televisions using this S-Video connection for a noticeable image improvement over traditional composite connecters.<br /> <strong><br /> Xbox LIVE</strong><br /> Connect to Xbox LIVE for free and you&rsquo;ll find free game trials and have immediate access to HD movies and Game Add-ons like songs and characters (all sold separately) so the fun never ends. Included with your console is a one month subscription to Xbox LIVE Gold. Xbox LIVE Gold is the best in gaming and entertainment. Invite friends from all over to connect and play online multiplayer games or watch thousands of HD movies streamed instantly from Netflix. <span style="font-weight: bold;"><br /> <br /> What''s in the box:</span></p>
+<ul>
+<li>Xbox 360 Black Console</li>
+<li>Game</li>
+<li>Xbox 360 Black Wireless Controller</li>
+<li>Xbox 360 120GB Hard Drive</li>
+<li>Ethernet Cable</li>
+</ul>', 'f', NULL, NULL, '2010-06-24 05:39:00', NULL)[0m
+Redirected to http://0.0.0.0:3000/auctions/2
+Completed in 147ms (DB: 1) | 302 Found [http://0.0.0.0/auctions]
+
+
+Processing AuctionsController#show (for 127.0.0.1 at 2010-06-24 13:40:32) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mAuction Load (1.1ms)[0m   [0;1mSELECT * FROM "auctions" WHERE ("auctions"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering auctions/show
+Completed in 132ms (View: 116, DB: 1) | 200 OK [http://0.0.0.0/auctions/2]
+
+
+Processing AuctionsController#index (for 127.0.0.1 at 2010-06-24 13:40:35) [GET]
+  [4;35;1mAuction Load (2.0ms)[0m   [0mSELECT * FROM "auctions" [0m
+Rendering template within layouts/application
+Rendering auctions/index
+Completed in 33ms (View: 23, DB: 2) | 200 OK [http://0.0.0.0/auctions]

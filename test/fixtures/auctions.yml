@@ -1,11 +1,51 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  title: MyString
+  meta_description: MyString
+  meta_keywords: MyString
+  description: MyString
+  category_id: 1
+  start_time: 2010-06-24 12:40:20
+  end_time: 2010-06-24 12:40:20
+  rrp: 1.5
+  start_price: 1.5
+  featured: false
+  delivery_cost: 1.5
+  delivery_information: MyString
+  peak_only: false
+  fixed_price: 1.5
+  minimum_price: 1.5
+  time_extended: 1
+  time_before_extended: 1
+  autobid: false
+  autobid_limit: 1
+  current_limit: 1
+  extend_enabled: false
+  winner_id: 1
+  status_id: 1
+  closed: false
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+two:
+  title: MyString
+  meta_description: MyString
+  meta_keywords: MyString
+  description: MyString
+  category_id: 1
+  start_time: 2010-06-24 12:40:20
+  end_time: 2010-06-24 12:40:20
+  rrp: 1.5
+  start_price: 1.5
+  featured: false
+  delivery_cost: 1.5
+  delivery_information: MyString
+  peak_only: false
+  fixed_price: 1.5
+  minimum_price: 1.5
+  time_extended: 1
+  time_before_extended: 1
+  autobid: false
+  autobid_limit: 1
+  current_limit: 1
+  extend_enabled: false
+  winner_id: 1
+  status_id: 1
+  closed: false
