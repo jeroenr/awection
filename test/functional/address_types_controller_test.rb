@@ -1,54 +1,45 @@
 require 'test_helper'
 
 class AddressTypesControllerTest < ActionController::TestCase
-  def test_index
+  test "should get index" do
     get :index
-    assert_template 'index'
+    assert_response :success
+    assert_not_nil assigns(:address_types)
   end
-  
-  def test_show
-    get :show, :id => AddressType.first
-    assert_template 'show'
-  end
-  
-  def test_new
+
+  test "should get new" do
     get :new
-    assert_template 'new'
+    assert_response :success
   end
-  
-  def test_create_invalid
-    AddressType.any_instance.stubs(:valid?).returns(false)
-    post :create
-    assert_template 'new'
+
+  test "should create address_type" do
+    assert_difference('AddressType.count') do
+      post :create, :address_type => { }
+    end
+
+    assert_redirected_to address_type_path(assigns(:address_type))
   end
-  
-  def test_create_valid
-    AddressType.any_instance.stubs(:valid?).returns(true)
-    post :create
-    assert_redirected_to address_type_url(assigns(:address_type))
+
+  test "should show address_type" do
+    get :show, :id => address_types(:one).to_param
+    assert_response :success
   end
-  
-  def test_edit
-    get :edit, :id => AddressType.first
-    assert_template 'edit'
+
+  test "should get edit" do
+    get :edit, :id => address_types(:one).to_param
+    assert_response :success
   end
-  
-  def test_update_invalid
-    AddressType.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => AddressType.first
-    assert_template 'edit'
+
+  test "should update address_type" do
+    put :update, :id => address_types(:one).to_param, :address_type => { }
+    assert_redirected_to address_type_path(assigns(:address_type))
   end
-  
-  def test_update_valid
-    AddressType.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => AddressType.first
-    assert_redirected_to address_type_url(assigns(:address_type))
-  end
-  
-  def test_destroy
-    address_type = AddressType.first
-    delete :destroy, :id => address_type
-    assert_redirected_to address_types_url
-    assert !AddressType.exists?(address_type.id)
+
+  test "should destroy address_type" do
+    assert_difference('AddressType.count', -1) do
+      delete :destroy, :id => address_types(:one).to_param
+    end
+
+    assert_redirected_to address_types_path
   end
 end

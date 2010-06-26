@@ -1,0 +1,20 @@
+<h1>Listing address_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @address_types.each do |address_type| %>
+  <tr>
+    <td><%=h address_type.name %></td>
+    <td><%= link_to 'Show', address_type %></td>
+    <td><%= link_to 'Edit', edit_address_type_path(address_type) %></td>
+    <td><%= link_to 'Destroy', address_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New address_type', new_address_type_path %>

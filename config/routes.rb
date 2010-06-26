@@ -1,4 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :genders
+
+  map.resources :users
+
+  map.resources :addresses
+
+  map.resources :address_types
+
+  map.resources :accounts
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

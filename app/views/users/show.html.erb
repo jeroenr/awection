@@ -1,0 +1,68 @@
+<p>
+  <b>Username:</b>
+  <%=h @user.username %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%=h @user.password %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%=h @user.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%=h @user.last_name %>
+</p>
+
+<p>
+  <b>Date of birth:</b>
+  <%=h @user.date_of_birth %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%=h @user.gender_id %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @user.active %>
+</p>
+
+<p>
+  <b>Key:</b>
+  <%=h @user.key %>
+</p>
+
+<p>
+  <b>Newsletter:</b>
+  <%=h @user.newsletter %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%=h @user.admin %>
+</p>
+
+<p>
+  <b>Autobidder:</b>
+  <%=h @user.autobidder %>
+</p>
+
+<p>
+  <b>Autobidder bid message:</b>
+  <%=h @user.autobidder_bid_message %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
