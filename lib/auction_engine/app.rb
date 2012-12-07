@@ -24,9 +24,8 @@ module AuctionEngine
     
     set :views, File.dirname(__FILE__) + '/views'
     
-    
     get "/" do
-      "Size: "+$bid_queue.size.to_s
+      erb :stats
     end
     
     get "/strap" do
@@ -41,16 +40,12 @@ module AuctionEngine
       "Bid Queue Size: "+$bid_queue.size.to_s
     end
     
-    get "/stats" do
-      erb :stats
-    end
-    
     get "/current_stats" do
-      str = ""
-      str+= "Time now: "+Time.now.to_s+"<br />"
-      str+= "Queue size: "+$bid_queue.size.to_s+"<br />"
-      str+= "Top Bid: "+$top_bids.top_bid.inspect+"<br />"
-      str
+      if $bid_queue.size == 0
+        erb :top_bid
+      else
+        erb :process
+      end
     end
     
     get "/process" do

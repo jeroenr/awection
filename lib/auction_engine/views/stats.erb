@@ -26,7 +26,7 @@
 	$(document).ready(function(){
 		
 		getStats();
-		setInterval("getStats();", 1000);
+		window.int = setInterval("getStats();", 1000);
 		
 	});
 </script>
