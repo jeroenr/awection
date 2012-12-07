@@ -1,0 +1,32 @@
+<style type="text/css" media="screen">
+	html {font-size:0.8em;}
+	a {cursor:pointer;color:blue;}
+</style>
+
+<p><a onclick="$.ajax({url: '/strap'});return false">Strap</a> | <a onclick="$.ajax({url: '/process'});return false">Process</a></p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+
+<div id="stats">
+	
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	
+	function getStats(){
+		$.ajax({
+			url: "/current_stats",
+			success: function(html){
+				$('#stats').prepend('<hr />');
+				$('#stats').prepend(html);
+			}
+		});
+	};
+
+	$(document).ready(function(){
+		
+		getStats();
+		setInterval("getStats();", 1000);
+		
+	});
+</script>

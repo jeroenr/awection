@@ -1,9 +1,13 @@
-== RAILS AUCTION
+* Intro
 
-Our powerful, feature-rich Swoopo Clone allows you to run your own penny auction website in seconds. Join the big boys like Swoopo, Madbid, BidBoogie and more.
+This was written as a proof of concept for an auction engine.
 
-== CHANGELOG
+It simulates 10k users clicking on the bid button at once with sequential bids (which would never happen in real life).
 
-Development : 0.0.1 Alpha
-Date        : 06/22/2010
+It was designed to stress test the bottleneck.. the 'is this bid the current highest?' as the calculation has to be performed in serial. All other parts can be performed in parallel so not tested here.
 
+Made using Ruby 1.9.1, Sinatra and Redis.
+
+* Results
+
+On a large instance on EC2 it could get all 10k sequential bids off it's queue in ~4.5secs. Nice!
