@@ -7,9 +7,6 @@ require 'thread'
 
 require 'redis'
 
-# slooooww.. removing
-#require 'mega_mutex'
-
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
 require File.join(File.dirname(__FILE__), 'models/top_bids')
@@ -35,7 +32,11 @@ module AuctionEngine
     get "/strap" do
       $redis.flushdb
       (1..100000).to_a.reverse.each do |i|
-        $bid_queue.add_bid({:user => "a_user", :amount => 1})
+        $bid_queue.add_bid(
+            {
+                :user => "user #{i}",
+                :amount => rand(9999) + 1
+            })
       end
       "Bid Queue Size: "+$bid_queue.size.to_s
     end
@@ -60,6 +61,7 @@ module AuctionEngine
       end
       ""
     end
-    
+
+
   end
 end
