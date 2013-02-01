@@ -41,8 +41,8 @@ $ ->
       @counter++
       inputField = $('#bid')
       @bids.create {
-        user: "user #{@counter}"
-        amount: inputField.val
+        user: "user #{@counter}",
+        amount: inputField.val()
       }
       inputField.val ''
 

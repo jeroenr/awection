@@ -57,12 +57,13 @@ module AuctionEngine
     end
 
     post "/bids" do
-      bid = JSON.parse request.body.read
+      bid = request.body.read
       $bid_queue.add_bid(
                   {
-                      :user => bid.user,
-                      :amount => bid.amount
+                      :user => bid['user'],
+                      :amount => bid['amount']
                   })
+      ""
     end
 
     # Ugly way to run BidWorker pool as a daemon
