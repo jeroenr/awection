@@ -36,6 +36,7 @@ module AuctionEngine
         # The second parameter defines where the compressed version will be served.
         # (Note: that parameter is optional, AssetPack will figure it out.)
         js :application, '/js/application.js', [
+          '/js/vendor/jquery*.js',
           '/js/vendor/underscore-min.js',
           '/js/vendor/*.js',
           '/js/app/*.js'
