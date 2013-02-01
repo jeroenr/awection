@@ -1,4 +1,5 @@
 APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "../../"))
+require 'bundler/setup'
 
 require 'sinatra/base'
 require 'erb'
@@ -10,7 +11,6 @@ require 'redis'
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
 require File.join(File.dirname(__FILE__), 'models/top_bids')
-
 
 # globally available across all threads for stats
 $redis = Redis.new(:host => 'localhost', :port => 6379)
@@ -25,38 +25,23 @@ module AuctionEngine
     set :views, File.dirname(__FILE__) + '/views'
     
     get "/" do
-      erb :stats
-    end
-    
-    get "/strap" do
-      $redis.flushdb
-      (1..100000).to_a.reverse.each do |i|
-        $bid_queue.add_bid(
-            {
-                :user => "user #{i}",
-                :amount => rand(9999) + 1
-            })
-      end
-      "Bid Queue Size: "+$bid_queue.size.to_s
-    end
-    
-    get "/current_stats" do
-      if $bid_queue.size == 0
-        erb :top_bid
-      else
-        erb :process
-      end
-    end
-    
-    get "/process" do
-      (1..10).each do |t|
-        Thread.new do
-          BidWorker.new.do_loop
-        end
-      end
-      ""
+      erb :index
     end
 
+    post "/bids" do
+      bid = JSON.parse request.body.read
+      $bid_queue.add_bid(
+                  {
+                      :user => bid.user,
+                      :amount => bid.amount
+                  })
+    end
 
+    # Ugly way to run BidWorker pool as a daemon
+    (1..10).each do |t|
+      Thread.new do
+        BidWorker.new.do_loop
+      end
+    end
   end
 end
