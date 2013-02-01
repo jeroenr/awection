@@ -8,6 +8,8 @@ require 'thread'
 
 require 'redis'
 
+require 'coffee_script'
+
 require 'sinatra/assetpack'
 
 require File.join(File.dirname(__FILE__), 'models/bid_queue')

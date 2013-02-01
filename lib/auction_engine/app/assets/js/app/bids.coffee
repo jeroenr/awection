@@ -32,7 +32,7 @@ $ ->
       _.bindAll @
 
       @bids = new Bids
-      @bids.bind 'create', @prependBid
+      @bids.bind 'add', @prependBid
 
       @counter = 0
       @render()
@@ -40,10 +40,11 @@ $ ->
     handleNewBid: ->
       @counter++
       inputField = $('#bid')
-      @bids.create {
-        user: "user #{@counter}",
-        amount: inputField.val()
-      }
+      bid = new Bid
+      bid.set user: "user #{@counter}"
+      bid.set amount: inputField.val()
+      @bids.add bid
+
       inputField.val ''
 
     prependBid: (bid) ->
