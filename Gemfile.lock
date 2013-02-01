@@ -11,9 +11,6 @@ GEM
     json (1.7.6)
     multi_json (1.5.0)
     rack (1.4.4)
-    rack-coffee (1.0.0)
-      coffee-script
-      rack
     rack-protection (1.3.2)
       rack
     rack-test (0.6.2)
@@ -37,7 +34,6 @@ DEPENDENCIES
   coffee-script
   execjs
   json
-  rack-coffee
   redis
   sinatra
   sinatra-assetpack
