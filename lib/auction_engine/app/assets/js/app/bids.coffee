@@ -7,14 +7,14 @@ $ ->
 
   class Bids extends Backbone.Collection
     model: Bid
-    url:  'http://localhost:9292/app'
+    url:  'http://localhost:9292/bids'
 
 
   class BidView extends Backbone.View
     tagName: 'li'
 
     initialize: ->
-      _bindAll @
+      _.bindAll @
 
     render: ->
       $(@el).html """
@@ -26,7 +26,7 @@ $ ->
 
   class BidsView extends Backbone.View
 
-    el: $ 'app'
+    el: $ '#bidArea'
 
     initialize: ->
       _.bindAll @
@@ -50,6 +50,17 @@ $ ->
       bidView = new BidView model: bid
       $('#bids').prepend bidView.render().el
 
-    events: 'submit #bidForm' : 'handleNewBid'
+    render: ->
+      $(@el).append """
+                    <h2>Bids</h2>
+                    <ul id='bids'></ul>
+                      <div>
+                        <input id='bid' name='bid' type="text" />
+                        <a href="#" id="submitBid">Bid</a>
+                      </div>
+                    """
+
+    events:
+      'click #submitBid': 'handleNewBid'
 
   bidsView = new BidsView
