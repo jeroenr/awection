@@ -10,7 +10,11 @@ require 'redis'
 
 require 'coffee_script'
 
+require 'thin'
+require 'pusher'
+
 require 'sinatra/assetpack'
+require 'sinatra/reloader'
 
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
@@ -28,7 +32,13 @@ module AuctionEngine
     set :root, File.dirname(__FILE__)
     set :views, File.dirname(__FILE__) + '/views'
 
-    register Sinatra::AssetPack
+    configure do
+        register Sinatra::AssetPack
+        register Sinatra::Reloader
+        Pusher.app_id = ''
+        Pusher.key = ''
+        Pusher.secret = ''
+    end
 
     assets {
         serve '/js',     from: 'assets/js'        # Optional

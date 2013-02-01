@@ -33,6 +33,12 @@ class BidWorker
                   
       # insert at top of of bid cache
       @top_bids.insert(@fresh_bid_hash)
+
+      # Push highest bid
+      Pusher['highest-bid'].trigger(
+          'new',
+          @top_bids.top_bid
+      )
       
       #cleanup
       
