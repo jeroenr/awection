@@ -1,16 +1,16 @@
 $ ->
 
-  class Bid extends Backbone.Model
+  class window.Bid extends Backbone.Model
     defaults:
       user: 'anonymous'
       amount: 0
 
-  class Bids extends Backbone.Collection
+  class window.Bids extends Backbone.Collection
     model: Bid
     url:  'http://localhost:9292/bids'
 
 
-  class BidView extends Backbone.View
+  class window.BidView extends Backbone.View
     tagName: 'li'
 
     initialize: ->
@@ -24,7 +24,7 @@ $ ->
                   """
       @
 
-  class BidsView extends Backbone.View
+  class window.BidsView extends Backbone.View
 
     el: $ '#bidArea'
 
