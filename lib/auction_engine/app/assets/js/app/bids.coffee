@@ -40,10 +40,10 @@ $ ->
     handleNewBid: ->
       @counter++
       inputField = $('#bid')
-      bid = new Bid
-      bid.set user: "user #{@counter}"
-      bid.set amount: inputField.val()
-      @bids.add bid
+      @bids.add new Bid {
+              user: "user #{@counter}",
+              amount: inputField.val()
+            }
 
       inputField.val ''
 
@@ -53,7 +53,7 @@ $ ->
 
     render: ->
       $(@el).append """
-                    <h2>Bids</h2>
+                    <h2>User bid history</h2>
                     <ul id='bids'></ul>
                       <div>
                         <input id='bid' name='bid' type="text" />
