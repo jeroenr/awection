@@ -1,4 +1,4 @@
-APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), "../../"))
+
 require 'bundler/setup'
 
 require 'sinatra/base'
@@ -7,6 +7,8 @@ require 'benchmark'
 require 'thread'
 
 require 'redis'
+
+require 'sinatra/assetpack'
 
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
@@ -21,8 +23,31 @@ $mutex = Mutex.new
 
 module AuctionEngine
   class App < Sinatra::Base
-    
+    set :root, File.dirname(__FILE__)
     set :views, File.dirname(__FILE__) + '/views'
+
+    register Sinatra::AssetPack
+
+    assets {
+        serve '/js',     from: 'assets/js'        # Optional
+        serve '/css',    from: 'assets/css'       # Optional
+        serve '/images', from: 'assets/images'    # Optional
+
+        # The second parameter defines where the compressed version will be served.
+        # (Note: that parameter is optional, AssetPack will figure it out.)
+        js :application, '/js/application.js', [
+          '/js/app/*.js',
+          '/js/vendor/*.js'
+        ]
+
+        css :application, '/css/application.css', [
+          '/css/main.css'
+        ]
+
+        prebuild ENV['RACK_ENV'] == 'production'
+      }
+    
+
     
     get "/" do
       erb :index

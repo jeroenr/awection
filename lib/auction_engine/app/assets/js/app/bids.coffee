@@ -7,7 +7,7 @@ $ ->
 
   class Bids extends Backbone.Collection
     model: Bid
-    url:  'http://localhost:9292/bids'
+    url:  'http://localhost:9292/app'
 
 
   class BidView extends Backbone.View
@@ -26,7 +26,7 @@ $ ->
 
   class BidsView extends Backbone.View
 
-    el: $ 'bids'
+    el: $ 'app'
 
     initialize: ->
       _.bindAll @

@@ -1,13 +1,15 @@
 source "http://rubygems.org"
 
-gem "sinatra"
+gem 'sinatra'
 
-gem "coffee-script"
+gem 'coffee-script'
 
-gem "rack-coffee"
+gem 'rack-coffee'
 
-gem "redis"
+gem 'redis'
 
-gem "json"
+gem 'json'
 
-gem "execjs"
+gem 'execjs'
+
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
