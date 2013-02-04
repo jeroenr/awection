@@ -64,4 +64,16 @@ $ ->
     events:
       'click #submitBid': 'handleNewBid'
 
+  class window.TopBid extends Backbone.Model
+    defaults:
+          user: 'anonymous'
+          amount: 0
+
+  window.topBid = new window.TopBid
+
   bidsView = new BidsView
+
+  pusher = new Pusher(10)
+
+  topBidChannel = pusher.subscribe('highest-bid')
+  backPusher = new Backpusher(topBidChannel, window.topBid)
