@@ -7,7 +7,7 @@ $ ->
 
   class window.Bids extends Backbone.Collection
     model: Bid
-    url:  'http://localhost:9292/bids'
+    url:  'http://localhost:3000/bids'
 
 
   class window.BidView extends Backbone.View
@@ -40,11 +40,12 @@ $ ->
     handleNewBid: ->
       @counter++
       inputField = $('#bid')
-      @bids.add new Bid {
-              user: "user #{@counter}",
-              amount: inputField.val()
-            }
-
+      bid = new Bid {
+      user: "user #{@counter}",
+      amount: inputField.val()
+      }
+      @bids.add bid
+      bid.save()
       inputField.val ''
 
     prependBid: (bid) ->
@@ -72,3 +73,4 @@ $ ->
   window.topBid = new window.TopBid
 
   bidsView = new BidsView
+  ws = new WebSocket("ws://localhost:8080");

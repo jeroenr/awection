@@ -35,7 +35,8 @@ class BidWorker
       @top_bids.insert(@fresh_bid_hash)
 
       # Push highest bid
-
+      puts "highest bid is going to be pushed #{@top_bids.top_bid}"
+      $channel.push @top_bids.top_bid
       
       #cleanup
       
