@@ -65,13 +65,11 @@ module AuctionEngine
 
 
       get "/" do
-        puts "get index"
         erb :index
       end
 
       post "/bids" do
         bid = request.body.read
-        puts "bid posted #{bid}"
         $bid_queue.add_bid(
             {
                 :user => bid['user'],
@@ -91,7 +89,6 @@ module AuctionEngine
 
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
          ws.onopen do
-           puts "open!"
            sid = $channel.subscribe do |msg|
              ws.send msg
            end

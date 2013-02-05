@@ -24,9 +24,9 @@ class BidWorker
   def process
     
     $mutex.synchronize do   
-            
       # compare to highest bid
       top_bid = @top_bids.top_bid
+      puts "processing... #{top_bid}"
       if top_bid && (@fresh_bid_hash[:amount] <= eval(top_bid)[:amount])
         return false
       end
