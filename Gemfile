@@ -10,6 +10,5 @@ gem 'execjs'
 
 gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 
-gem 'pusher'
 gem 'thin'
 gem 'sinatra-contrib', :require => 'sinatra/reloader'

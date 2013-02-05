@@ -11,7 +11,6 @@ require 'redis'
 require 'coffee_script'
 
 require 'thin'
-require 'pusher'
 
 require 'sinatra/assetpack'
 require 'sinatra/reloader'
@@ -35,9 +34,6 @@ module AuctionEngine
     configure do
         register Sinatra::AssetPack
         register Sinatra::Reloader
-        Pusher.app_id = ''
-        Pusher.key = ''
-        Pusher.secret = ''
     end
 
     assets {
