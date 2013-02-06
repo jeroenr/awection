@@ -76,7 +76,6 @@ module AuctionEngine
                 :user => bid['user'],
                 :amount => bid['amount']
             })
-
         ""
       end
     end
@@ -100,7 +99,7 @@ module AuctionEngine
              $channel.push ({
                :id => sid,
                :top_bid => msg
-             })
+             }.to_json)
            end
 
            ws.onclose do
