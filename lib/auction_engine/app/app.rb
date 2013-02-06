@@ -2,6 +2,7 @@
 require 'bundler/setup'
 
 require 'sinatra/base'
+require 'json'
 require 'erb'
 require 'benchmark'
 require 'thread'
@@ -69,7 +70,7 @@ module AuctionEngine
       end
 
       post "/bids" do
-        bid = request.body.read
+        bid = JSON.parse(request.body.read)
         $bid_queue.add_bid(
             {
                 :user => bid['user'],
