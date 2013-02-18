@@ -6,10 +6,10 @@ class BidWorker
   end
   
   def do_loop
-    while take_bid
-      process
+    while true
+      process if take_bid
     end
-  end  
+  end
   
   def take_bid
     @fresh_bid_hash = @bid_queue.take_bid

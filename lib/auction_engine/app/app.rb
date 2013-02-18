@@ -85,6 +85,7 @@ module AuctionEngine
       Thread.new do
         BidWorker.new.do_loop
       end
+
     end
 
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
