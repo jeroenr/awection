@@ -18,14 +18,15 @@ require 'sinatra/reloader'
 
 require 'em-websocket'
 
+require File.join(File.dirname(__FILE__), 'models/redis_entity')
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
 require File.join(File.dirname(__FILE__), 'models/top_bids')
+require File.join(File.dirname(__FILE__), 'models/top_bids_channel')
 
 # globally available across all threads for stats
-$redis = Redis.new(:host => 'localhost', :port => 6379)
 $bid_queue = BidQueue.new
-$top_bids = TopBids.new
+$top_bids_channel = TopBidsChannel.new
 # rubys built in mutex runs *much* faster than a network mutex so needs to be globally available across all threads
 $mutex = Mutex.new
 
@@ -71,6 +72,7 @@ module AuctionEngine
 
       post "/bids" do
         bid = JSON.parse(request.body.read)
+        puts "bid #{bid}"
         $bid_queue.add_bid(
             {
                 :user => bid['user'],
@@ -87,6 +89,11 @@ module AuctionEngine
       end
 
     end
+
+    #$top_bids_channel.on_top_bid do |event|
+    #  puts "Top bid event #{event}"
+    #end
+
 
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
          ws.onopen do
