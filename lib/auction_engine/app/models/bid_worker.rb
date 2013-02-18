@@ -6,10 +6,10 @@ class BidWorker
   end
   
   def do_loop
-    while take_bid
-      process
+    while true
+      process if take_bid
     end
-  end  
+  end
   
   def take_bid
     @fresh_bid_hash = @bid_queue.take_bid
@@ -24,15 +24,19 @@ class BidWorker
   def process
     
     $mutex.synchronize do   
-            
       # compare to highest bid
       top_bid = @top_bids.top_bid
+      puts "processing... #{top_bid}"
       if top_bid && (@fresh_bid_hash[:amount] <= eval(top_bid)[:amount])
         return false
       end
                   
       # insert at top of of bid cache
       @top_bids.insert(@fresh_bid_hash)
+
+      # Push highest bid
+      puts "highest bid is going to be pushed #{@top_bids.top_bid}"
+      $channel.push @top_bids.top_bid
       
       #cleanup
       
