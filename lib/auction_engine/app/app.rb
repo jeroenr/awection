@@ -72,7 +72,6 @@ module AuctionEngine
 
       post "/bids" do
         bid = JSON.parse(request.body.read)
-        puts "bid #{bid}"
         $bid_queue.add_bid(
             {
                 :user => bid['user'],

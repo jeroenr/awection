@@ -6,9 +6,7 @@ class BidQueue < RedisEntity
   end
   
   def add_bid(hash)
-
     @db.lpush(QUEUE_NAME, hash)
-    puts "added bid #{@db.lindex(QUEUE_NAME, 0)}"
   end
   
   def take_bid

@@ -10,6 +10,7 @@ class BidWorker
     while true
       latest_bid = @bid_queue.take_bid
       process(latest_bid) if latest_bid
+      sleep 1
     end
   end
 
@@ -28,11 +29,10 @@ class BidWorker
       # compare to highest bid
       top_bid = @top_bids.top_bid
       puts "processing... #{top_bid}"
-      if top_bid && latest_bid[:amount] > top_bid[:amount]
-        handle_new_top_bid(latest_bid)
-      else
+      if top_bid and (latest_bid[:amount].to_f <= top_bid[:amount].to_f)
         return false
       end
+      handle_new_top_bid(latest_bid)
     end
   end
 
