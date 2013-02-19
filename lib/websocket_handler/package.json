@@ -1,0 +1,12 @@
+{
+  "name": "awection websocket",
+  "description": "node.js websocket handler for awection",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "socket.io": "0.9.9",
+    "underscore": "1.4.4",
+    "redis": "0.8.1"
+  }
+}
