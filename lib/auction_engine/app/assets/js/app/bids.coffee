@@ -52,16 +52,6 @@ $ ->
       bidView = new BidView model: bid
       $('#bids').prepend bidView.render().el
 
-    render: ->
-      $(@el).append """
-                    <h2>User bid history</h2>
-                    <ul id='bids'></ul>
-                      <div>
-                        <input id='bid' name='bid' type="text" />
-                        <a href="#" id="submitBid">Bid</a>
-                      </div>
-                    """
-
     events:
       'click #submitBid': 'handleNewBid'
 
