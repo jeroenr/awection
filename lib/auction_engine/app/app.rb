@@ -19,6 +19,7 @@ require 'sinatra/reloader'
 require 'em-websocket'
 
 require File.join(File.dirname(__FILE__), 'models/redis_entity')
+require File.join(File.dirname(__FILE__), 'models/bid')
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
 require File.join(File.dirname(__FILE__), 'models/top_bids')
@@ -70,11 +71,7 @@ module AuctionEngine
 
       post "/bids" do
         bid = JSON.parse(request.body.read)
-        $bid_queue.add_bid(
-            {
-                :user => bid['user'],
-                :amount => bid['amount']
-            })
+        $bid_queue.add_bid(Bid.new(bid['user'], bid['amount']))
         ""
       end
     end

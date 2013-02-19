@@ -6,12 +6,13 @@ class TopBids < RedisEntity
   end
   
   def top_bid
-    from_raw(@db.lindex(LIST_NAME, 0))
+    h = from_raw(@db.lindex(LIST_NAME, 0))
+    Bid.deserialize(h) if h
   end
   
-  def insert(hash)
-    @db.lpush(LIST_NAME, hash)
-    @db.ltrim(LIST_NAME,0, 4)
+  def insert(bid)
+    @db.lpush(LIST_NAME, bid.serialize)
+    @db.ltrim(LIST_NAME, 0, 4)
   end
   
   def dump
