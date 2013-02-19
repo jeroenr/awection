@@ -27,8 +27,6 @@ require File.join(File.dirname(__FILE__), 'models/top_bids_channel')
 # globally available across all threads for stats
 $bid_queue = BidQueue.new
 $top_bids_channel = TopBidsChannel.new
-# rubys built in mutex runs *much* faster than a network mutex so needs to be globally available across all threads
-$mutex = Mutex.new
 
 $channel = EM::Channel.new
 

@@ -1,5 +1,10 @@
 class BidWorker
-      
+
+  def self.mutex
+    # rubys built in mutex runs *much* faster than a network mutex so needs to be globally available across all threads
+    @mutex ||= Mutex.new
+  end
+
   def initialize
     @bid_queue = BidQueue.new
     @top_bids = TopBids.new
@@ -7,7 +12,7 @@ class BidWorker
   end
   
   def do_loop
-    while true
+    loop do
       latest_bid = @bid_queue.take_bid
       process(latest_bid) if latest_bid
       sleep 1
@@ -25,7 +30,7 @@ class BidWorker
   
   def process(latest_bid)
     
-    $mutex.synchronize do   
+    self.class.mutex.synchronize do
       # compare to highest bid
       top_bid = @top_bids.top_bid
       puts "processing... #{top_bid}"
@@ -35,5 +40,4 @@ class BidWorker
       handle_new_top_bid(latest_bid)
     end
   end
-
 end
