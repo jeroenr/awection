@@ -88,24 +88,23 @@ module AuctionEngine
 
     Thread.new do
       $top_bids_channel.on_top_bid do |event|
-        event.message do |chan, bid|
-          puts "got message #{bid}"
+        event.message do |chan, message|
+          bid = Bid.deserialize(eval(message))
           SOCKETS.each do |ws|
-            ws.send bid
+            ws.send "#{bid.amount} by #{bid.user}"
           end
         end
       end
     end
 
-
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
-      puts "Sockets available: #{SOCKETS.length}"
-         ws.onopen do
-           SOCKETS << ws
-         end
-         ws.onclose do
-           SOCKETS.delete(ws)
-         end
+       ws.onopen do
+         SOCKETS << ws
+         puts "Sockets available: #{SOCKETS.length}"
+       end
+       ws.onclose do
+         SOCKETS.delete(ws)
+       end
     end
     App.run!({:port => 3000})
   end
