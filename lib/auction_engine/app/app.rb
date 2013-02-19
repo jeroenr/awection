@@ -29,11 +29,13 @@ require File.join(File.dirname(__FILE__), 'models/top_bids_channel')
 $bid_queue = BidQueue.new
 $top_bids_channel = TopBidsChannel.new
 
-$channel = EM::Channel.new
+SOCKETS = []
 
 module AuctionEngine
   EventMachine.run do
     class App < Sinatra::Base
+
+
       set :root, File.dirname(__FILE__)
       set :views, File.dirname(__FILE__) + '/views'
 
@@ -84,29 +86,25 @@ module AuctionEngine
 
     end
 
-    #$top_bids_channel.on_top_bid do |event|
-    #  puts "Top bid event #{event}"
-    #end
+    Thread.new do
+      $top_bids_channel.on_top_bid do |event|
+        event.message do |chan, bid|
+          puts "got message #{bid}"
+          SOCKETS.each do |ws|
+            ws.send bid
+          end
+        end
+      end
+    end
 
 
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
+      puts "Sockets available: #{SOCKETS.length}"
          ws.onopen do
-           sid = $channel.subscribe do |msg|
-             ws.send msg
-           end
-           $channel.push "#{sid} connected!"
-
-           ws.onmessage do |msg|
-             puts "Message! #{msg}"
-             $channel.push ({
-               :id => sid,
-               :top_bid => msg
-             }.to_json)
-           end
-
-           ws.onclose do
-             $channel.unsubscribe(sid)
-           end
+           SOCKETS << ws
+         end
+         ws.onclose do
+           SOCKETS.delete(ws)
          end
     end
     App.run!({:port => 3000})
