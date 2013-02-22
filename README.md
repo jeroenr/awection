@@ -10,7 +10,7 @@ Basic architecture
 AuctionEngine (Sinatra) --publish--> Redis <--subscribe-- WebSocket Handler (Node.JS / Socket.io)
 
 ### Frontend
-AuctionEngine (Sinatra) --bids (JSON)--> view (Backbone.js) <--top bids (JSON)-- WebSocket Handler (Node.JS / Socket.io)
+AuctionEngine (Sinatra) <--bids (JSON)-- view (Backbone.js) <--top bids (JSON)-- WebSocket Handler (Node.JS / Socket.io)
 
 Sinatra + Assets + Backbone
 ---------------------------
