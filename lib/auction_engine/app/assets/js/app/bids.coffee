@@ -65,8 +65,7 @@ $ ->
   bidsView = new BidsView
   socket = io.connect('http://localhost:4000')
 
-  socket.on 'message', (event)->
-    alert("message #{event} received")
+  socket.on 'newtopbid', (msg)->
     $('body').append """
-                     <p>Top bid: #{event.data}</p>
+                     <p>Top bid: #{msg}</p>
                      """
