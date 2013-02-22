@@ -19,6 +19,7 @@ require 'sinatra/reloader'
 require 'em-websocket'
 
 require File.join(File.dirname(__FILE__), 'models/redis_entity')
+require File.join(File.dirname(__FILE__), 'models/bid')
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
 require File.join(File.dirname(__FILE__), 'models/top_bids')
@@ -27,14 +28,14 @@ require File.join(File.dirname(__FILE__), 'models/top_bids_channel')
 # globally available across all threads for stats
 $bid_queue = BidQueue.new
 $top_bids_channel = TopBidsChannel.new
-# rubys built in mutex runs *much* faster than a network mutex so needs to be globally available across all threads
-$mutex = Mutex.new
 
-$channel = EM::Channel.new
+SOCKETS = []
 
 module AuctionEngine
   EventMachine.run do
     class App < Sinatra::Base
+
+
       set :root, File.dirname(__FILE__)
       set :views, File.dirname(__FILE__) + '/views'
 
@@ -72,11 +73,7 @@ module AuctionEngine
 
       post "/bids" do
         bid = JSON.parse(request.body.read)
-        $bid_queue.add_bid(
-            {
-                :user => bid['user'],
-                :amount => bid['amount']
-            })
+        $bid_queue.add_bid(Bid.new(bid['user'], bid['amount']))
         ""
       end
     end
@@ -89,30 +86,25 @@ module AuctionEngine
 
     end
 
-    #$top_bids_channel.on_top_bid do |event|
-    #  puts "Top bid event #{event}"
-    #end
-
+    Thread.new do
+      $top_bids_channel.on_top_bid do |event|
+        event.message do |chan, message|
+          bid = Bid.deserialize(eval(message))
+          SOCKETS.each do |ws|
+            ws.send "#{bid.amount} by #{bid.user}"
+          end
+        end
+      end
+    end
 
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
-         ws.onopen do
-           sid = $channel.subscribe do |msg|
-             ws.send msg
-           end
-           $channel.push "#{sid} connected!"
-
-           ws.onmessage do |msg|
-             puts "Message! #{msg}"
-             $channel.push ({
-               :id => sid,
-               :top_bid => msg
-             }.to_json)
-           end
-
-           ws.onclose do
-             $channel.unsubscribe(sid)
-           end
-         end
+       ws.onopen do
+         SOCKETS << ws
+         puts "Sockets available: #{SOCKETS.length}"
+       end
+       ws.onclose do
+         SOCKETS.delete(ws)
+       end
     end
     App.run!({:port => 3000})
   end

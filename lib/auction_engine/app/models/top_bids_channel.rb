@@ -5,7 +5,7 @@ class TopBidsChannel < RedisEntity
     @db.subscribe(CHANNEL_NAME, &block)
   end
 
-  def new_top_bid(message)
-    @db.publish(CHANNEL_NAME, message)
+  def new_top_bid(bid)
+    @db.publish(CHANNEL_NAME, bid.serialize)
   end
 end
