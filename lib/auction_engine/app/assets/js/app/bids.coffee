@@ -63,9 +63,10 @@ $ ->
   window.topBid = new window.TopBid
 
   bidsView = new BidsView
-  ws = new WebSocket("ws://localhost:8080")
+  socket = io.connect('http://localhost:4000')
 
-  ws.onmessage = (event)->
+  socket.on 'message', (event)->
+    alert("message #{event} received")
     $('body').append """
                      <p>Top bid: #{event.data}</p>
                      """

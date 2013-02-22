@@ -20,4 +20,21 @@ pickle-email-*.html
 *.ipr
 *.iws
 .idea/
+BUILD*
+build*
+.waf*
+tags
+.lock-wscript
+*.pyc
+doc/api.xml
+tools/nodejs.pc
+tmp/
+node
+node_g
+*.swp
+.benchmark_reports
+/.project
+/.cproject
+node_modules
+*.log
 
