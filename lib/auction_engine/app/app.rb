@@ -16,8 +16,6 @@ require 'thin'
 require 'sinatra/assetpack'
 require 'sinatra/reloader'
 
-require 'em-websocket'
-
 require File.join(File.dirname(__FILE__), 'models/redis_entity')
 require File.join(File.dirname(__FILE__), 'models/bid')
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
@@ -29,10 +27,7 @@ require File.join(File.dirname(__FILE__), 'models/top_bids_channel')
 $bid_queue = BidQueue.new
 $top_bids_channel = TopBidsChannel.new
 
-SOCKETS = []
-
 module AuctionEngine
-  EventMachine.run do
     class App < Sinatra::Base
 
 
@@ -86,26 +81,5 @@ module AuctionEngine
 
     end
 
-    Thread.new do
-      $top_bids_channel.on_top_bid do |event|
-        event.message do |chan, message|
-          bid = Bid.deserialize(eval(message))
-          SOCKETS.each do |ws|
-            ws.send "#{bid.amount} by #{bid.user}"
-          end
-        end
-      end
-    end
-
-    EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 8080) do |ws|
-       ws.onopen do
-         SOCKETS << ws
-         puts "Sockets available: #{SOCKETS.length}"
-       end
-       ws.onclose do
-         SOCKETS.delete(ws)
-       end
-    end
     App.run!({:port => 3000})
   end
-end

@@ -13,5 +13,4 @@ gem 'execjs'
 gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 
 gem 'thin'
-gem 'em-websocket'
 gem 'sinatra-contrib', :require => 'sinatra/reloader'
