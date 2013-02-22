@@ -1,5 +1,5 @@
 {
-  "name": "awection websocket",
+  "name": "awection_websocket",
   "description": "node.js websocket handler for awection",
   "version": "0.1.0",
   "private": true,
