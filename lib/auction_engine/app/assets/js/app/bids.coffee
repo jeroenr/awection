@@ -63,9 +63,11 @@ $ ->
   window.topBid = new window.TopBid
 
   bidsView = new BidsView
+
   socket = io.connect('http://localhost:4000')
 
   socket.on 'newtopbid', (msg)->
     $('body').append """
                      <p>Top bid: #{msg}</p>
                      """
+
