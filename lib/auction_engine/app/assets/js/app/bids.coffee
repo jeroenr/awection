@@ -59,15 +59,33 @@ $ ->
     defaults:
           user: 'anonymous'
           amount: 0
+          timestamp: new Date().toUTCString()
 
-  window.topBid = new window.TopBid
+  class window.TopBidView extends Backbone.View
+    tagName: 'li'
+
+    initialize: ->
+      _.bindAll @
+
+    render: ->
+      console.log("render top bids")
+      $(@el).html """
+                  <span>
+                      #{@model.get 'user'} bid #{@model.get 'amount'}
+                  </span>
+                  """
+      @
+
+  window.topBid = new TopBid
+
+  window.topBidView = new TopBidView model: window.topBid
 
   bidsView = new BidsView
 
   socket = io.connect('http://localhost:4000')
 
-  socket.on 'newtopbid', (msg)->
-    $('body').append """
-                     <p>Top bid: #{msg}</p>
-                     """
+  socket.on 'newtopbid', (topBid)->
+    window.topBid.set(topBid)
+    window.topBidView.render().$('#topbids ul')
+
 
