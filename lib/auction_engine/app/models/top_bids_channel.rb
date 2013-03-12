@@ -6,6 +6,6 @@ class TopBidsChannel < RedisEntity
   end
 
   def new_top_bid(bid)
-    @db.publish(CHANNEL_NAME, bid.serialize)
+    @db.publish(CHANNEL_NAME, bid.serialize.to_json)
   end
 end
