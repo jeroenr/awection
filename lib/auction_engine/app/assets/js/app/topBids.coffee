@@ -9,17 +9,17 @@ $ ->
     model: TopBid
 
   class window.TopBidView extends Backbone.View
-    tagName: 'li'
+    tagName: 'div'
+    className: 'container'
 
     initialize: ->
       _.bindAll @
 
     render: ->
-      console.log("render top bid")
       $(@el).html """
-                  <span>
-                      #{@model.get 'user'} bid #{@model.get 'amount'}
-                  </span>
+                  <p class="muted credit">
+                    The current highest bid placed is <strong>#{@model.get 'amount'} &euro;</strong> by #{@model.get 'user'}
+                  </p>
                   """
       @
 
@@ -30,7 +30,7 @@ $ ->
       _.bindAll @
 
       @topBids = new TopBids
-      @topBids.bind 'add', @prependBid
+      @topBids.bind 'add', @renderBid
 
       @render()
 
@@ -41,10 +41,10 @@ $ ->
       console.log("adding top bid " + topBid)
       @topBids.add topBid
 
-    prependBid: (topBid) ->
-      console.log("prepending top bid")
+    renderBid: (topBid) ->
       topBidView = new TopBidView model: topBid
-      $('#topbids').prepend topBidView.render().el
+
+      $('#footer').html topBidView.render().el
 
 
   topBidsView = new TopBidsView

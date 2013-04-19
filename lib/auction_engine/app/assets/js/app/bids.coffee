@@ -18,9 +18,9 @@ $ ->
 
     render: ->
       $(@el).html """
-                  <span>
-                    #{@model.get 'user'} bid #{@model.get 'amount'}
-                  </span>
+                  <a href="#">
+                    #{@model.get 'user'} bid #{@model.get 'amount'} &euro;
+                  </a>
                   """
       @
 
@@ -40,10 +40,12 @@ $ ->
     handleNewBid: ->
       @counter++
       inputField = $('#bid')
+
       bid = new Bid {
-      user: "user #{@counter}",
-      amount: inputField.val()
+        user: "user #{@counter}",
+        amount: inputField.val()
       }
+
       @bids.add bid
       bid.save()
       inputField.val ''
@@ -68,7 +70,6 @@ $ ->
       _.bindAll @
 
     render: ->
-      console.log("render top bids")
       $(@el).html """
                   <span>
                       #{@model.get 'user'} bid #{@model.get 'amount'}

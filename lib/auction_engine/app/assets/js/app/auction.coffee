@@ -15,9 +15,7 @@ $ ->
         [padded_minutes, padded_seconds] = [(@model.get 'minutes'),(@model.get 'seconds')].map (_) -> String("00#{_}").slice(-2)
         String("00#{_}").slice(-2)
         $(@el).html """
-                    <h1>
                       #{padded_minutes}:#{padded_seconds}
-                    </h1>
                     """
         @
 
