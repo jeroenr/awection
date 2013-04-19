@@ -4,13 +4,20 @@ $ ->
       user_id: null
 
     initialize: ->
-      @load
+      @load()
 
     authenticated: ->
       Boolean(@get('user_id'))
 
     load: ->
       @set
-        user_id: $.cookie('user_id')
+        user_id: $.cookie('user_id') or @setCookie
+
+    setCookie: ->
+      key = Math.random().toString(36).substr(2)
+
+      $.cookie('user_id', key, expires: 1)
+
+      return key
 
   window.session = new Session()

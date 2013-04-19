@@ -35,10 +35,9 @@ $ ->
       @render()
 
     handleNewTopBid: (topBidJson)->
-      console.log("new top bid " + topBidJson)
       topBidHash = JSON.parse(topBidJson)
-      topBid = new TopBid(topBidHash)
-      console.log("adding top bid " + topBid)
+      topBid     = new TopBid(topBidHash)
+
       @topBids.add topBid
 
     renderBid: (topBid) ->
