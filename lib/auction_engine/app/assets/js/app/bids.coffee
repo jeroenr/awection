@@ -18,9 +18,9 @@ $ ->
 
     render: ->
       $(@el).html """
-                  <span>
-                    #{@model.get 'user'} bid #{@model.get 'amount'}
-                  </span>
+                  <a href="#">
+                    #{@model.get 'user'} bid #{@model.get 'amount'} &euro;
+                  </a>
                   """
       @
 
@@ -32,25 +32,20 @@ $ ->
       _.bindAll @
 
       @bids = new Bids
-      @bids.bind 'add', @prependBid
 
-      @counter = 0
       @render()
 
     handleNewBid: ->
-      @counter++
       inputField = $('#bid')
+
       bid = new Bid {
-      user: "user #{@counter}",
-      amount: inputField.val()
+        user: session.get('user_id'),
+        amount: inputField.val()
       }
+
       @bids.add bid
       bid.save()
       inputField.val ''
-
-    prependBid: (bid) ->
-      bidView = new BidView model: bid
-      $('#bids').prepend bidView.render().el
 
     events:
       'click #submitBid': 'handleNewBid'
@@ -68,7 +63,6 @@ $ ->
       _.bindAll @
 
     render: ->
-      console.log("render top bids")
       $(@el).html """
                   <span>
                       #{@model.get 'user'} bid #{@model.get 'amount'}
@@ -76,11 +70,9 @@ $ ->
                   """
       @
 
-  window.topBid = new TopBid
-
+  window.topBid     = new TopBid
   window.topBidView = new TopBidView model: window.topBid
-
-  bidsView = new BidsView
+  window.bidsView   = new BidsView
 
   socket = io.connect('http://localhost:4000')
 
@@ -89,3 +81,6 @@ $ ->
     window.topBidView.render().$('#topbids ul')
 
 
+  socket.on 'newbid', (bid) ->
+    bidView = new BidView model: new Bid(JSON.parse(bid))
+    $('#bids').prepend bidView.render().el

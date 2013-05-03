@@ -11,11 +11,17 @@
  *= require_tree .
 */
 
-input[type="text"] {
-  width: 450px;
+#clock {
+  font-size: 4em;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
-#bidArea {
-  width:600px;
-  margin: 10px auto;
+.bidding-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input#bid {
+  margin-bottom: 0px;
 }
