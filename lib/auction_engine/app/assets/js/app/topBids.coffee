@@ -52,3 +52,6 @@ $ ->
 
   socket.on 'newtopbid', (topBid)->
     topBidsView.handleNewTopBid(topBid)
+
+  socket.on 'bidHistory', (data) ->
+    topBidsView.handleNewTopBid(data[0])

@@ -7,12 +7,12 @@ class BidQueue < RedisEntity
 
   def add_bid(bid)
     @db.lpush(QUEUE_NAME, bid.serialize)
-    @db.publish(QUEUE_NAME, bid.serialize.to_json)
+    @db.publish(QUEUE_NAME, bid.serialize)
   end
 
   def take_bid
-    h = from_raw(@db.lpop(QUEUE_NAME))
-    Bid.deserialize(h) if h
-  end
+    bid = @db.lpop(QUEUE_NAME)
 
+    Bid.deserialize(bid) if bid
+  end
 end
