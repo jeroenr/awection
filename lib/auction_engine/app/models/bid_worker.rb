@@ -6,14 +6,15 @@ class BidWorker
   end
 
   def initialize
-    @bid_queue = BidQueue.new
-    @top_bids = TopBids.new
+    @bid_queue        = BidQueue.new
+    @top_bids         = TopBids.new
     @top_bids_channel = TopBidsChannel.new
   end
-  
+
   def do_loop
     loop do
       latest_bid = @bid_queue.take_bid
+
       process(latest_bid) if latest_bid
       sleep 1
     end
@@ -25,17 +26,20 @@ class BidWorker
 
     # Push highest bid
     puts "highest bid is going to be pushed #{top_bid}"
+
     @top_bids_channel.new_top_bid top_bid
   end
-  
+
   def process(latest_bid)
-    
     self.class.mutex.synchronize do
       # compare to highest bid
       top_bid = @top_bids.top_bid
-      if top_bid and top_bid >= latest_bid
+      puts "This is the top bid #{top_bid.inspect}"
+
+      if top_bid && top_bid >= latest_bid
         return false
       end
+
       handle_new_top_bid(latest_bid)
     end
   end
