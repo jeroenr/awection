@@ -37,4 +37,4 @@ node_g
 /.cproject
 node_modules
 *.log
-
+dump.rdb
