@@ -1,6 +1,4 @@
-
 require 'bundler/setup'
-
 require 'sinatra/base'
 require 'json'
 require 'erb'
@@ -40,9 +38,10 @@ module AuctionEngine
       end
 
       assets {
-        serve '/js', from: 'assets/js' # Optional
-        serve '/css', from: 'assets/css' # Optional
-        serve '/images', from: 'assets/images' # Optional
+        serve '/js',  from: 'assets/js'
+        serve '/css', from: 'assets/css'
+        serve '/img', from: 'assets/img'
+        serve 'font', from: 'assets/font'
 
         # The second parameter defines where the compressed version will be served.
         # (Note: that parameter is optional, AssetPack will figure it out.)
