@@ -74,6 +74,7 @@ module AuctionEngine
 
       post "/bids" do
         bid = JSON.parse(request.body.read)
+
         $bid_queue.add_bid(Bid.new(bid['user'], bid['amount']))
         ""
       end
