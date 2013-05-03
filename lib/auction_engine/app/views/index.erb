@@ -1,15 +1,33 @@
-<div id='clock'>
-</div>
-<div id='topbidsArea'>
-  <h1>Top bids</h1>
-  <ul id='topbids'></ul>
-</div>
-<div id='bidArea'>
-    <h2>User bid history</h2>
-    <ul id='bids'></ul>
-      <div>
-        <input id='bid' name='bid' type="text" />
-        <a href="#" id="submitBid">Bid</a>
+<!-- Part 1: Wrap all page content here -->
+<div id="wrap">
+
+  <!-- Begin page content -->
+  <div class="container">
+    <div class="page-header">
+      <i class="icon-time icon-4x"></i>
+      <span id="clock"></span>
+    </div>
+
+    <div id="bidArea">
+
+      <!-- Bidding input -->
+      <div class="bidding-container">
+        <input type="text" id="bid">
+        <button class="btn btn-success" type="button" id="submitBid">BID!</button>
       </div>
+
+
+      <!-- Bid History -->
+      <h1 style="text-align:center;"><small>History</small></h1>
+      <ul class="nav nav-tabs nav-stacked" id="bids"></ul>
+    </div>
+  </div>
+
+  <div id="push"></div>
 </div>
 
+<div id="footer">
+  <div class="container">
+    <p class="muted credit">There's not a highest bid yet.</p>
+  </div>
+</div>
