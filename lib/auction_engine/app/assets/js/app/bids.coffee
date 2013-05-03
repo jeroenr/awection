@@ -50,37 +50,15 @@ $ ->
     events:
       'click #submitBid': 'handleNewBid'
 
-  class window.TopBid extends Backbone.Model
-    defaults:
-          user: 'anonymous'
-          amount: 0
-          timestamp: new Date().toUTCString()
-
-  class window.TopBidView extends Backbone.View
-    tagName: 'li'
-
-    initialize: ->
-      _.bindAll @
-
-    render: ->
-      $(@el).html """
-                  <span>
-                      #{@model.get 'user'} bid #{@model.get 'amount'}
-                  </span>
-                  """
-      @
-
-  window.topBid     = new TopBid
-  window.topBidView = new TopBidView model: window.topBid
   window.bidsView   = new BidsView
 
   socket = io.connect('http://localhost:4000')
 
-  socket.on 'newtopbid', (topBid)->
-    window.topBid.set(topBid)
-    window.topBidView.render().$('#topbids ul')
+  socket.on 'newtopbid', (topBid) ->
+    populateBidHistory(topBid)
+  socket.on 'bidHistory', (data) ->
+    data.map (bid) -> populateBidHistory(bid)
 
-
-  socket.on 'newbid', (bid) ->
-    bidView = new BidView model: new Bid(JSON.parse(bid))
-    $('#bids').prepend bidView.render().el
+  populateBidHistory = (bid) ->
+     bidView = new BidView model: new Bid(JSON.parse(bid))
+     $('#bids').prepend bidView.render().el
