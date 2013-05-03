@@ -17,11 +17,13 @@ require 'sinatra/reloader'
 require File.join(File.dirname(__FILE__), 'models/redis_entity')
 require File.join(File.dirname(__FILE__), 'models/bid')
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
+require File.join(File.dirname(__FILE__), 'models/auction_queue')
 require File.join(File.dirname(__FILE__), 'models/bid_worker')
 require File.join(File.dirname(__FILE__), 'models/top_bids')
 require File.join(File.dirname(__FILE__), 'models/top_bids_channel')
 
 # globally available across all threads for stats
+$auction_queue = AuctionQueue.new
 $bid_queue = BidQueue.new
 $top_bids_channel = TopBidsChannel.new
 
@@ -63,6 +65,11 @@ module AuctionEngine
 
       get "/" do
         erb :index
+      end
+
+      post "/start" do
+        $auction_queue.start
+        "auction started"
       end
 
       post "/bids" do
