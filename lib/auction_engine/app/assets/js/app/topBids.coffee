@@ -21,6 +21,7 @@ $ ->
                     The current highest bid placed is <strong>#{@model.get 'amount'} &euro;</strong> by #{@model.get 'user'}
                   </p>
                   """
+      $('#bid').val(parseInt(@model.get 'amount') + 5)
       @
 
   class window.TopBidsView extends Backbone.View

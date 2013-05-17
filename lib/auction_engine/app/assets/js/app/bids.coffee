@@ -7,7 +7,7 @@ $ ->
 
   class window.Bids extends Backbone.Collection
     model: Bid
-    url:  'http://localhost:3000/bids'
+    url:  '/bids'
 
 
   class window.BidView extends Backbone.View
@@ -40,7 +40,7 @@ $ ->
 
       bid = new Bid {
         user: session.get('user_id'),
-        amount: inputField.val()
+        amount: parseInt(inputField.val())
       }
 
       @bids.add bid
