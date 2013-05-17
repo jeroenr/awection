@@ -50,8 +50,6 @@ $ ->
 
   topBidsView = new TopBidsView
 
-  socket = io.connect('http://localhost:4000')
-
   socket.on 'newtopbid', (topBid)->
     topBidsView.handleNewTopBid(topBid)
 

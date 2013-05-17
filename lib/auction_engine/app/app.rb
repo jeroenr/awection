@@ -73,11 +73,6 @@ module AuctionEngine
         erb :channel
       end
 
-      post "/start" do
-        $auction_queue.start
-        "auction started"
-      end
-
       post "/bids" do
         bid = JSON.parse(request.body.read)
 
