@@ -36,7 +36,7 @@ $ ->
       @render()
 
     handleNewTopBid: (topBidJson)->
-      if topBidJson is not 'undefined'
+      if topBidJson
         topBidHash = JSON.parse(topBidJson)
         topBid     = new TopBid(topBidHash)
 
