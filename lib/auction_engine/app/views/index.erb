@@ -1,5 +1,5 @@
 <!-- Part 1: Wrap all page content here -->
-<div id="wrap" style="display:none">
+<div id="wrap" style="display:block">
 
   <!-- Begin page content -->
   <div class="container">
@@ -17,10 +17,26 @@
       </div>
 
 
-      <!-- Bid History -->
-      <h1 style="text-align:center;"><small>History</small></h1>
-      <ul class="nav nav-tabs nav-stacked" id="bids"></ul>
+
+      <div class="history pull-left">
+        <h1 style="header"><small>History</small></h1>
+        <ul class="nav nav-tabs nav-stacked" id="bids"></ul>
+      </div>
+
+
+      <div class="participants pull-right">
+        <h1 class="header"><small>Participants</small></h1>
+        <div class="well" style="margin-top:20px;">
+          <ul id="participants-list" class="nav nav-pills nav-stacked">
+
+          </ul>
+        </div>
+      </div>
     </div>
+
+
+
+
   </div>
 
   <div id="push"></div>
