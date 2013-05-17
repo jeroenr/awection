@@ -19,7 +19,7 @@ $ ->
     render: ->
       $(@el).html """
                   <a href="#">
-                    #{@model.get 'user'} bid #{@model.get 'amount'} &euro;
+                    &euro; #{@model.get 'amount'} by #{@model.get 'user'} 
                   </a>
                   """
       @
@@ -45,7 +45,6 @@ $ ->
 
       @bids.add bid
       bid.save()
-      inputField.val ''
 
     events:
       'click #submitBid': 'handleNewBid'

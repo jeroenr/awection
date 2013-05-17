@@ -30,3 +30,8 @@ $ ->
     timeLeft.set(timeUpdate)
     timeLeftView.render()
 
+  socket.on 'timeup', (timeUpdate) ->
+    $('#submitBid').attr('disabled','disabled')
+    winner = $('#winner').html()
+    amount = $('#winningAmount').html()
+    announcement = noty({type: 'success', layout: 'center', text: """#{winner} is going on holiday for #{amount}. Congrats! """})
