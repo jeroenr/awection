@@ -25,3 +25,10 @@
 input#bid {
   margin-bottom: 0px;
 }
+
+#fb-login {
+  text-align: center;
+  margin: 0 auto;
+  float: left;
+  width: 100%;
+}
