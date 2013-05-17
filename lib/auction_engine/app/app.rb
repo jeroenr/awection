@@ -14,6 +14,10 @@ require 'thin'
 require 'sinatra/assetpack'
 require 'sinatra/reloader'
 
+require 'sinatra/config_file'
+
+
+
 require File.join(File.dirname(__FILE__), 'models/redis_entity')
 require File.join(File.dirname(__FILE__), 'models/bid')
 require File.join(File.dirname(__FILE__), 'models/bid_queue')
@@ -37,6 +41,9 @@ module AuctionEngine
       configure do
         register Sinatra::AssetPack
         register Sinatra::Reloader
+        register Sinatra::ConfigFile
+
+        config_file 'config.yml'
       end
 
       assets {
@@ -66,7 +73,7 @@ module AuctionEngine
 
 
       get "/" do
-        erb :index
+        erb :index, :locals => {:websocket_endpoint => settings.websocket_endpoint}
       end
 
       get '/channel.html' do

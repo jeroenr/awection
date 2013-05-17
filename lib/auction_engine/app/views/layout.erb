@@ -69,11 +69,11 @@
   <body>
     <div id="fb-root"></div>
     <script type="text/javascript">
-      window.socket = io.connect('http://localhost:4000');
+      window.socket = io.connect('<%= websocket_endpoint %>');
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '617331874944410',
-          channelUrl : '//localhost:3000/channel.html',
+          channelUrl : '/channel.html',
           status     : true, // check login status
           cookie     : true, // enable cookies to allow the server to access the session
           xfbml      : true  // parse XFBML
