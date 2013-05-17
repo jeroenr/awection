@@ -67,6 +67,63 @@
   </head>
 
   <body>
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '617331874944410',
+          channelUrl : '//localhost:3000/channel.html',
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true  // parse XFBML
+        });
+
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+          } else if (response.status === 'not_authorized') {
+            FB.login();
+          } else {
+            FB.login();
+          }
+         });
+
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+          if (response.status === 'connected') {
+            testAPI();
+          } else if (response.status === 'not_authorized') {
+            FB.login();
+          } else {
+            console.log('not connected')
+            FB.login();
+          }
+        });
+      };
+
+      // Load the SDK asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document));
+
+
+      function testAPI() {
+        $('#wrap').css('display', 'block');
+        $('#fb-login').css('display', 'none');
+
+        FB.api('/me', function(response) {
+          $.cookie('user_id', response.name, {expires: 1});
+        });
+      }
+    </script>
+    <div id="fb-login">
+      <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+    </div>
+
     <%= yield %>
     <%= js :application %>
   </body>

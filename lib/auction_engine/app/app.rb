@@ -50,6 +50,8 @@ module AuctionEngine
         js :application, '/js/application.js', [
             '/js/vendor/jquery*.js',
             '/js/vendor/underscore-min.js',
+            '/js/vendor/noty/*.js',
+            '/js/vendor/noty/**/*.js',
             '/js/vendor/*.js',
             '/js/app/*.js'
 
@@ -65,6 +67,10 @@ module AuctionEngine
 
       get "/" do
         erb :index
+      end
+
+      get '/channel.html' do
+        erb :channel
       end
 
       post "/start" do

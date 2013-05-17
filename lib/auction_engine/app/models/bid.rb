@@ -5,7 +5,7 @@ class Bid
 
   def initialize(user, amount, timestamp = Time.now.getutc)
     @user      = user
-    @amount    = amount.to_f
+    @amount    = amount.to_i
     @timestamp = timestamp
   end
 
