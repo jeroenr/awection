@@ -19,7 +19,7 @@ $ ->
     render: ->
       $(@el).html """
                   <a href="#">
-                    &euro; #{@model.get 'amount'} by #{@model.get 'user'} 
+                    &euro; #{@model.get 'amount'} by #{@model.get 'user'}
                   </a>
                   """
       @
@@ -50,8 +50,6 @@ $ ->
       'click #submitBid': 'handleNewBid'
 
   window.bidsView   = new BidsView
-
-  socket = io.connect('http://localhost:4000')
 
   socket.on 'newtopbid', (topBid) ->
     populateBidHistory(topBid)

@@ -24,8 +24,6 @@ $ ->
 
   timeLeftView.render()
 
-  socket = io.connect('http://localhost:4000')
-
   socket.on 'tick', (timeUpdate)->
     timeLeft.set(timeUpdate)
     timeLeftView.render()
