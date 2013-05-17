@@ -36,10 +36,11 @@ $ ->
       @render()
 
     handleNewTopBid: (topBidJson)->
-      topBidHash = JSON.parse(topBidJson)
-      topBid     = new TopBid(topBidHash)
+      if topBidJson
+        topBidHash = JSON.parse(topBidJson)
+        topBid     = new TopBid(topBidHash)
 
-      @topBids.add topBid
+        @topBids.add topBid
 
     renderBid: (topBid) ->
       topBidView = new TopBidView model: topBid
