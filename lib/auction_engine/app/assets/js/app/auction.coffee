@@ -31,6 +31,9 @@ $ ->
     participantList.empty()
     participantList.append("""<li>#{participant}</li>""" ) for participant in participants
 
+  socket.on 'auction_started', () ->
+    $.noty.closeAll();
+
   socket.on 'remaining_participants', (remainingParticipants) ->
     $.noty.closeAll();
     noty({text: """#{remainingParticipants} more participants needed to start the auction""", type: 'information' });

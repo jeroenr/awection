@@ -54,7 +54,8 @@ $ ->
   socket.on 'newtopbid', (topBid) ->
     populateBidHistory(topBid)
   socket.on 'bidHistory', (data) ->
-    data.map (bid) -> populateBidHistory(bid)
+    $('#bids').empty()
+    data.reverse().map (bid) -> populateBidHistory(bid)
 
   populateBidHistory = (bid) ->
      bidView = new BidView model: new Bid(JSON.parse(bid))
