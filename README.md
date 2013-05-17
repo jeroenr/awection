@@ -23,3 +23,14 @@ I'm using a Redis queue to process bids. When a bid comes in which is currently 
 Websocket handler
 -----------------
 The Websocket handler is a Node.js app using Socket.io for the fallback. The Websocket handler subscribes to the redis top bids channel. When a bid comes in it's broadcasted to the clients.
+
+How to use
+------------------
+Make sure you have installed the following dependencies
+- Node.js 0.10.5
+
+``
+bundle install
+foreman start
+node lib/websocket_handler/app.js
+``

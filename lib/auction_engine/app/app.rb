@@ -69,6 +69,10 @@ module AuctionEngine
         erb :index
       end
 
+      get '/channel.html' do
+        erb :channel
+      end
+
       post "/start" do
         $auction_queue.start
         "auction started"
