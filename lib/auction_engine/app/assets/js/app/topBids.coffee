@@ -18,9 +18,10 @@ $ ->
     render: ->
       $(@el).html """
                   <p class="muted credit">
-                    The current highest bid placed is <strong>#{@model.get 'amount'} &euro;</strong> by #{@model.get 'user'}
+                    The current highest bid placed is <strong id='winningAmount'>&euro; #{@model.get 'amount'}</strong> by <span id='winner'>#{@model.get 'user'}</span>
                   </p>
                   """
+      $('#bid').val(parseInt(@model.get 'amount') + 5)
       @
 
   class window.TopBidsView extends Backbone.View
