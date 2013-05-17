@@ -29,8 +29,8 @@ How to use
 Make sure you have installed the following dependencies
 - Node.js 0.10.5
 
-``
-bundle install
-foreman start
-node lib/websocket_handler/app.js
-``
+````
+  bundle install
+  foreman start
+  node lib/websocket_handler/app.js
+````
