@@ -32,3 +32,13 @@ input#bid {
   float: left;
   width: 100%;
 }
+
+.history {
+  width: 75%;
+}
+
+
+.header {
+  display: inline;
+  width: 50%;
+}

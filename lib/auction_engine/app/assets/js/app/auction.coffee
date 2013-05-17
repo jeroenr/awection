@@ -24,6 +24,19 @@ $ ->
 
   timeLeftView.render()
 
+  populateParticipants = (participants) ->
+    participantList = $('#participants-list')
+
+    participantList.empty()
+    participantList.append("""<li>#{participant}</li>""" ) for participant in participants
+
+  socket.on 'remaining_participants', (remainingParticipants) ->
+      console.log remainingParticipants
+
+  socket.on 'new_participant', (participantsRoom) -> populateParticipants(participantsRoom.all)
+  socket.on 'participant_left', (participantsRoom) -> populateParticipants(participantsRoom.all)
+
+
   socket.on 'tick', (timeUpdate)->
     timeLeft.set(timeUpdate)
     timeLeftView.render()
