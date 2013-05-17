@@ -24,7 +24,20 @@ $ ->
 
   timeLeftView.render()
 
-  socket = io.connect('http://localhost:4000')
+  populateParticipants = (participants) ->
+    $.noty.closeAll();
+    participantList = $('#participants-list')
+
+    participantList.empty()
+    participantList.append("""<li>#{participant}</li>""" ) for participant in participants
+
+  socket.on 'remaining_participants', (remainingParticipants) ->
+    $.noty.closeAll();
+    noty({text: """#{remainingParticipants} more participants needed to start the auction""", type: 'information' });
+
+  socket.on 'new_participant', (participantsRoom) -> populateParticipants(participantsRoom.all)
+  socket.on 'participant_left', (participantsRoom) -> populateParticipants(participantsRoom.all)
+
 
   socket.on 'tick', (timeUpdate)->
     timeLeft.set(timeUpdate)
