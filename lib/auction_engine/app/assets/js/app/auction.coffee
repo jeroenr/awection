@@ -31,7 +31,10 @@ $ ->
     participantList.append("""<li>#{participant}</li>""" ) for participant in participants
 
   socket.on 'remaining_participants', (remainingParticipants) ->
-      console.log remainingParticipants
+    noty({text: """#{remainingParticipants} more participants needed to start the auction""", type: 'information' });
+
+    setTimeout($.noty.closeAll, 1000);
+
 
   socket.on 'new_participant', (participantsRoom) -> populateParticipants(participantsRoom.all)
   socket.on 'participant_left', (participantsRoom) -> populateParticipants(participantsRoom.all)
